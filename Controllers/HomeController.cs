@@ -38,11 +38,6 @@ namespace BilliWebApp.Controllers
             return View();
         }
 
-        public IActionResult Account()
-        {
-            return View();
-        }
-
         public IActionResult Cart()
         {
             return View();
