@@ -1,4 +1,5 @@
 using BilliWebApp.Data;
+using BilliWebApp.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -62,6 +63,8 @@ namespace BilliWebApp
 
             services.AddAuthorization();
             services.AddControllersWithViews();
+
+            services.AddScoped<IdentityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
