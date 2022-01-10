@@ -37,6 +37,9 @@ a {
 
 body {
     font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .navbar {
@@ -76,6 +79,15 @@ p {
     padding-left: 25px;
     padding-right: 25px;
     padding-bottom: 56px;
+}
+
+.container1 {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 56px;
+    height: 700px;
 }
 
 .container-1 {
@@ -242,6 +254,7 @@ p {
     color: #8a8a8a;
     font-size: 14px;
     padding: 30px 0 20px;
+    margin-top: auto;
 }
 
 .footer-col-1 {
@@ -462,7 +475,6 @@ th:last-child {
     padding: 20px 0;
     margin: auto;
     box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
-    overflow: hidden;
 }
 
 .form-container span {
@@ -482,8 +494,7 @@ th:last-child {
     max-width: 300px;
     padding: 0 20px;
     position: absolute;
-    top: 130px;
-    transition: transform 1s;
+    top: 110px;
 }
 
 form input {
@@ -501,30 +512,20 @@ form .btn {
     margin: 10px 0;
 }
 
-    form .btn:focus {
-        outline: none;
-    }
-
-#LoginForm {
-    left: -300px;
-}
-
-#RegForm {
-    left: 0;
+form .btn:focus {
+    outline: none;
 }
 
 form a {
     font-size: 12px;
 }
 
-#Indicator {
+#Indicator{
     width: 100px;
     border: none;
     background: #de83a0;
     height: 3px;
     margin-top: 8px;
-    transform: translateX(100px);
-    transition: transform 1s;
 }
 
 

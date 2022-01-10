@@ -16,23 +16,6 @@ function menutoggle() {
 
 //--------------js for toggle form----------->
 
-function register() {
-    var RegForm = document.getElementById("RegForm");
-    var Indicator = document.getElementById("Indicator");
-    LoginForm.style.transform = "translateX(0px)";
-    RegForm.style.transform = "translateX(0px)";
-    Indicator.style.transform = "translateX(100px)";
-}
-
-
-function login() {
-    var LoginForm = document.getElementById("LoginForm");
-    var Indicator = document.getElementById("Indicator");
-    LoginForm.style.transform = "translateX(300px)";
-    RegForm.style.transform = "translateX(300px)";
-    Indicator.style.transform = "translateX(0px)";
-}
-
 //--------------js for product gallery----------->
 
 function initProductimages() {

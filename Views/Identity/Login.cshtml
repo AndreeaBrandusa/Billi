@@ -1,0 +1,20 @@
+﻿@using BilliWebApp.Models.Identity
+@model LoginModel
+
+
+<div class="account-page">
+    <div class="container1">
+        <div class="form-container">
+            <div class="form-btn">
+                <span onclick="login()">Login</span>
+                <hr id="Indicator">
+            </div>
+            <form asp-action="Login" id="LoginForm">
+                <input asp-for="Username" type="text" placeholder="Username">
+                <input asp-for="Password" type="password" placeholder="Password">
+                <button type="submit" class="btn">Login</button>
+                <a href="">Forgot password</a>
+            </form>
+        </div>
+    </div>
+</div>
