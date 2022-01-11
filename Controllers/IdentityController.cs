@@ -1,6 +1,7 @@
 ﻿using BilliWebApp.Models.Identity;
 using BilliWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace BilliWebApp.Controllers
 {
@@ -19,16 +20,34 @@ namespace BilliWebApp.Controllers
         }
 
         [HttpPost]
-
-        public IActionResult Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginModel model)
         {
-            _identityService.Login(model);
-            return null;
+            if (await _identityService.LoginAsync(model))
+            {
+                return RedirectToAction("Register");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Register()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterModel model)
+        {
+            if (await _identityService.RegisterAsync(model))
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

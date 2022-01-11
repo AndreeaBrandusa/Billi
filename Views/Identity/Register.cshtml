@@ -1,4 +1,6 @@
-﻿
+﻿@using BilliWebApp.Models.Identity
+@model RegisterModel
+
 <div class="account-page">
     <div class="container1">
         <div class="form-container">
@@ -6,10 +8,10 @@
                 <span onclick="register()">Register</span>
                 <hr id="Indicator">
             </div>
-            <form id="RegForm">
-                <input type="text" placeholder="Username">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
+            <form asp-action="Register" id="RegForm">
+                <input asp-for="Username" type="text" placeholder="Username">
+                <input asp-for="Email" type="email" placeholder="Email">
+                <input asp-for="Password" type="password" placeholder="Password">
                 <button type="submit" class="btn">Register</button>
             </form>
         </div>

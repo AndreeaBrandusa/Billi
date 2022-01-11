@@ -1,5 +1,6 @@
 using BilliWebApp.Data;
 using BilliWebApp.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,15 +36,23 @@ namespace BilliWebApp
             {
                 options.User.RequireUniqueEmail = true;  //allows only one account per email
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddSignInManager<SignInManager<IdentityUser>>();
+
 
             services.AddAuthentication(options =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;  //jwt authentication initialisation
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;  //x2
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;  //jwt authentication initialisation
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;  //x2
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; //x3
             })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                {
+                    options.LoginPath = "/Identity/Login";
+                })
                 .AddJwtBearer(options =>
                 {
+                    options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters  //token validation rules
                     {
                         ValidateIssuerSigningKey = true,
