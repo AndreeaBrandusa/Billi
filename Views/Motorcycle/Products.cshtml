@@ -14,11 +14,13 @@
     <div class="row0">
         @foreach (var item in Model)
         {
-            <div class="col4">
+            <a asp-controller="Motorcycle" asp-action="ProductDetails" asp-route-id="@item.ID">
+                <div class="col4">
                 <img src="../images/NINJA H2® SX SE(1).jpg">
                 <h4>@item.Name</h4>
                 <p>@item.Price</p>
-            </div>
+                </div>
+            </a>
         }
     </div>
 

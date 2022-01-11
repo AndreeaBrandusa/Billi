@@ -20,6 +20,11 @@ namespace BilliWebApp.Controllers
             return View();
         }
 
+        public IActionResult ProductDetails(string id)
+        {
+            return View(_service.GetMotorcycle(id));
+        }
+
         public async Task<IActionResult> Products()
         {
             return View(await _service.GetMotorcyclesAsync());
