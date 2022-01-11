@@ -96,7 +96,7 @@ namespace BilliWebApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Motorcycle}/{action=Index}/{id?}");
             });
         }
     }

@@ -1,0 +1,28 @@
+﻿@using BilliWebApp.Models.Motorcycle
+@model List<Motorcycle>
+
+<div class="small-container">
+    <div class="row0 row-2">
+        <h2>All Products</h2>
+        <select>
+            <option>Default Sorting</option>
+            <option>Sort by price</option>
+            <option>Sort by popularity</option>
+        </select>
+    </div>
+
+    <div class="row0">
+        @foreach (var item in Model)
+        {
+            <div class="col4">
+                <img src="../images/NINJA H2® SX SE(1).jpg">
+                <h4>@item.Name</h4>
+                <p>@item.Price</p>
+            </div>
+        }
+    </div>
+
+    <div class="page-btn">
+        <span>LOAD MORE</span>
+    </div>
+</div>
