@@ -1,36 +1,28 @@
 ﻿using BilliWebApp.Models.Motorcycle;
+using BilliWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BilliWebApp.Controllers
 {
     public class MotorcycleController : Controller
     {
+        private MotorcycleService _service;
+
+        public MotorcycleController(MotorcycleService service)
+        {
+            _service = service;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Products()
+        public async Task<IActionResult> Products()
         {
-            return View(new List<Motorcycle>
-            {
-                new Motorcycle
-                {
-                    ID = "sferresareae4e",
-                    Name = "motorcycle billy"
-                },
-                new Motorcycle
-                {
-                    ID = "sferrhdgseae4e",
-                    Name = "motorcycle gafi"
-                },
-                new Motorcycle
-                {
-                    ID = "sferreshfdseae4e",
-                    Name = "motorcycle billi"
-                }
-            });
+            return View(await _service.GetMotorcyclesAsync());
         }
     }
 }

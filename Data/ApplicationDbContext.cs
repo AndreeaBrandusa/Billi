@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BilliWebApp.Data
 {
@@ -16,5 +17,12 @@ namespace BilliWebApp.Data
         }
 
         public DbSet<Motorcycle> Motorcycles { get; set; }
+
+        public async Task<bool> SaveAsync()
+        {
+            var changesNumber = await SaveChangesAsync();
+
+            return changesNumber != 0;
+        }
     }
 }
