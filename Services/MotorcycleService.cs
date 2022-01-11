@@ -33,6 +33,18 @@ namespace BilliWebApp.Services
 
             return MotorcycleEntityToMotorcycleModel(result);
         }
+
+        public string GetImage(string id)
+        {
+            var tmp = _context.MotorcycleImages.FirstOrDefault(x => Equals(x.ID, id));
+            if (tmp == default)
+            {
+                return "";
+            }
+
+            return string.Format("data:image/jpg;base64,{0}", tmp.Image);
+        }
+
         private List<Motorcycle> MotorcycleEntitiesToMotorcycleModels(List<Entities.Motorcycle> motorcycles)
         {
             return motorcycles.Select(m => new Motorcycle
@@ -58,6 +70,7 @@ namespace BilliWebApp.Services
                 Price = motorcycle.Price,
                 Quantity = motorcycle.Quantity,
                 Details = motorcycle.Details,
+                ImgURL = GetImage(motorcycle.ID)
             };
         }
     }

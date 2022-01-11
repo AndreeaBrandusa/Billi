@@ -20,5 +20,7 @@ namespace BilliWebApp.Entities
         public int Price { get; set; }
 
         public string Details { get; set; }
+
+        public MotorcycleImage Image { get; set; }
     }
 }

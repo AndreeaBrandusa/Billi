@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace BilliWebApp.Entities
 {
-    public class MotorcycleImages
+    public class MotorcycleImage
     {
         public string ID { get; set; }
 
-        public string MotorcycleID { get; set; } 
+        public byte[] Image { get; set; }
 
-        public string Image { get; set; }
+        public Motorcycle Motorcycle { get; set; }
     }
 }

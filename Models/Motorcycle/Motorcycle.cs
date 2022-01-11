@@ -15,5 +15,7 @@
         public int Price { get; set; }
 
         public string Details { get; set; }
+
+        public string ImgURL { get; set; }
     }
 }
