@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,18 +38,19 @@ namespace BilliWebApp
                 options.User.RequireUniqueEmail = true;  //allows only one account per email
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddSignInManager<SignInManager<IdentityUser>>();
-
-
+                .AddSignInManager<SignInManager<IdentityUser>>()
+                .AddDefaultTokenProviders();
+            
             services.AddAuthentication(options =>
             {
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;  //jwt authentication initialisation
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;  //x2
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; //x3
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                .AddCookie("Cookie", config =>
                 {
-                    options.LoginPath = "/Identity/Login";
+                    config.Cookie.Name = "Billi.Cookie";
+                    config.LoginPath = "/Identity/Login";
                 })
                 .AddJwtBearer(options =>
                 {
@@ -64,7 +66,6 @@ namespace BilliWebApp
                         ClockSkew = System.TimeSpan.Zero
                     }; 
                 });
-
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
