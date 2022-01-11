@@ -22,25 +22,18 @@ namespace BilliWebApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            services.AddControllersWithViews();
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddIdentityCore<IdentityUser>(options =>
-            {
-                options.User.RequireUniqueEmail = true;  //allows only one account per email
-            })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddSignInManager<SignInManager<IdentityUser>>()
-                .AddDefaultTokenProviders();
-            
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
