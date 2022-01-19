@@ -29,5 +29,26 @@ namespace BilliWebApp.Controllers
         {
             return View(await _service.GetMotorcyclesAsync());
         }
+
+        [HttpPost]
+        public void SetImage()
+        {
+            var x = Request.Form.Files;
+        }
+
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddProduct(AddMotorcycle model)
+        {
+            if (!await _service.AddMotorcycle(model)) 
+            {
+                return View();
+            }
+            return RedirectToAction(nameof(Products));
+        }
     }
 }

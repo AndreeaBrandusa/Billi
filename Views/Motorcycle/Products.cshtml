@@ -16,9 +16,9 @@
         {
             <a asp-controller="Motorcycle" asp-action="ProductDetails" asp-route-id="@item.ID">
                 <div class="col4">
-                <img src="../images/NINJA H2® SX SE(1).jpg">
-                <h4>@item.Name</h4>
-                <p>@item.Price</p>
+                    <img src="@item.ImgURL" style = "width = 15 vw">
+                    <h4>@item.Name</h4>
+                    <p>@item.Price</p>
                 </div>
             </a>
         }
@@ -26,5 +26,11 @@
 
     <div class="page-btn">
         <span>LOAD MORE</span>
+    </div>
+
+    <div>
+        <a asp-controller="Motorcycle" asp-action="AddProduct">
+            <h2>Add</h2>
+        </a>
     </div>
 </div>
