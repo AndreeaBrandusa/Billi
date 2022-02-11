@@ -190,9 +190,34 @@ p {
     transition: transform 0.5s;
 }
 
-    .col4 img {
-        width: 100%;
-    }
+.col4 img {
+    width: 100%;
+}
+
+.product-row {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-left: 22px;
+}
+
+.product-row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.product-col {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+    transition: transform 0.5s;
+}
+
+.product-col img {
+    width: 100%;
+}
+
 
 .title {
     text-align: center;
@@ -322,7 +347,7 @@ ul {
 
 /*---------- all products page ----------*/
 
-.row-2 {
+.row2 {
     justify-content: space-between;
     margin: 1px auto 50px;
 }

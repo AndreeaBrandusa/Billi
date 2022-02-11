@@ -2,7 +2,7 @@
 @model List<Motorcycle>
 
 <div class="small-container">
-    <div class="row0 row-2">
+    <div class="row0 row2">
         <h2>All Products</h2>
         <select>
             <option>Default Sorting</option>
@@ -11,26 +11,28 @@
         </select>
     </div>
 
-    <div class="row0">
+    <div>
+        <a asp-controller="Motorcycle" asp-action="AddProduct">
+            <h2>Add product</h2>
+        </a>
+    </div>
+
+    <div class="product-row">
         @foreach (var item in Model)
         {
             <a asp-controller="Motorcycle" asp-action="ProductDetails" asp-route-id="@item.ID">
-                <div class="col4">
-                    <img src="@item.ImgURL" style = "width = 15 vw">
+                <div class="product-col">
+                    <img src="@item.ImgURL" style = "width: 15vw">
                     <h4>@item.Name</h4>
                     <p>@item.Price</p>
                 </div>
             </a>
         }
-    </div>
+    </div>  
+</div>
 
+<div>
     <div class="page-btn">
         <span>LOAD MORE</span>
-    </div>
-
-    <div>
-        <a asp-controller="Motorcycle" asp-action="AddProduct">
-            <h2>Add</h2>
-        </a>
-    </div>
+    </div>    
 </div>
