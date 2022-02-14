@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +28,11 @@ namespace BilliWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddControllersWithViews();
+            services.AddCors();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddAuthentication(options =>
@@ -65,7 +66,6 @@ namespace BilliWebApp
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddAuthorization();
-            services.AddControllersWithViews();
 
             services.AddScoped<IdentityService>();
             services.AddScoped<MotorcycleService>();
@@ -90,9 +90,14 @@ namespace BilliWebApp
 
             app.UseRouting();
 
+            app.UseCors(options => options
+                .SetIsOriginAllowed(x => _ = true)
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

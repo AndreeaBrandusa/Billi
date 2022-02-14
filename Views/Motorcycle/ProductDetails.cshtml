@@ -1,19 +1,19 @@
 ﻿@using BilliWebApp.Models.Motorcycle
+@using BilliWebApp.Models.Cart
 @model Motorcycle
 
 <!-------------- single product details ----------->
 <div class="small-container single-product">
     <div class="row0">
         <div class="col2">
-            <img src="@Model.ImgURL" style = "width = 30 vw" id="ProductImg">
+            <img src="@Model.ImgURL" style = "width: 30vw" id="ProductImg">
         </div>
         <div class="col2">
             <p>Home / Motorcycle</p>
             <h1>@Model.Name</h1>
             <h1>@Model.Brand</h1>
             <h4>@Model.Price</h4>
-            <input type="number" value="1">
-            <a href="" class="btn">Add To Cart</a>
+            <partial name="AddProductToCartPartial" model="@new AddToCartProduct{ ProductID = Model.ID }"/>
             <h3>Product Details</h3>
             <br>
             <p>@Model.Details</p>

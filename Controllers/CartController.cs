@@ -1,9 +1,12 @@
 ﻿using BilliWebApp.Models.Cart;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BilliWebApp.Controllers
 {
+    [Route("[controller]")]
     public class CartController : Controller
     {
         public IActionResult Cart()
@@ -24,6 +27,12 @@ namespace BilliWebApp.Controllers
                 Tax = 5 
             };
             return View(cart);
+        }
+
+        [HttpPost(nameof(AddToCart))]
+        public async Task<IActionResult> AddToCart([FromForm] AddToCartProduct model)
+        {
+            return Ok(model);
         }
     }
 }
