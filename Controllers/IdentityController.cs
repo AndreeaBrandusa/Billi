@@ -24,7 +24,7 @@ namespace BilliWebApp.Controllers
         {
             if (await _identityService.LoginAsync(model))
             {
-                return RedirectToAction("Register");
+                return RedirectToAction("Index", "Motorcycle");
             }
             else
             {
@@ -42,7 +42,7 @@ namespace BilliWebApp.Controllers
         {
             if (await _identityService.RegisterAsync(model))
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Index", "Motorcycle");
             }
             else
             {
