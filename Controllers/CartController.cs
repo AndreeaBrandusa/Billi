@@ -1,4 +1,5 @@
 ﻿using BilliWebApp.Models.Cart;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BilliWebApp.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     public class CartController : Controller
     {

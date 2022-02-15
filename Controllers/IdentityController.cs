@@ -1,6 +1,9 @@
 ﻿using BilliWebApp.Models.Identity;
 using BilliWebApp.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BilliWebApp.Controllers
@@ -22,8 +25,11 @@ namespace BilliWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            if (await _identityService.LoginAsync(model))
+            var result = await _identityService.LoginAsync(model);
+            if (result.Success)
             {
+                await HttpContext.SignInAsync(result.Principal, result.AuthProperties);
+                HttpContext.Response.Cookies.Append("jwt", result.Token);
                 return RedirectToAction("Index", "Motorcycle");
             }
             else
@@ -40,8 +46,11 @@ namespace BilliWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            if (await _identityService.RegisterAsync(model))
+            var result = await _identityService.RegisterAsync(model);
+            if (result.Success)
             {
+                await HttpContext.SignInAsync(result.Principal, result.AuthProperties);
+                HttpContext.Response.Cookies.Append("jwt", result.Token);
                 return RedirectToAction("Index", "Motorcycle");
             }
             else

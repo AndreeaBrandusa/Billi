@@ -9,6 +9,12 @@
 
 <script>
     function add(){
+        let bearer_token = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('jwt'))
+            .split('=')[1];
+
+        let bearer = `Bearer ${bearer_token}`;
         let endpoint = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/Cart/AddToCart";
         let form = document.getElementById("addToCartForm");
         let formData = new FormData(form);
@@ -18,8 +24,10 @@
             method: 'post',
             body: data,
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Authorization": bearer
+            },
+            credentials: "include"
         }).catch(function(error){
             console.log(error);
         });

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -52,13 +53,21 @@ namespace BilliWebApp
                     options.TokenValidationParameters = new TokenValidationParameters  //token validation rules
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("abcdefghijklmnopqrstuvwxyz012345")),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"])),
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         RequireExpirationTime = false,
                         ValidateLifetime = true,
                         ClockSkew = System.TimeSpan.Zero
-                    }; 
+                    };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            context.Token = context.Request.Cookies["jwt"];
+                            return Task.CompletedTask;
+                        }
+                    };
                 });
 
             services.AddDbContext<ApplicationDbContext>(options =>
