@@ -2,6 +2,7 @@
 using BilliWebApp.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -57,6 +58,15 @@ namespace BilliWebApp.Controllers
             {
                 return View();
             }
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            HttpContext.Response.Cookies.Delete("jwt");
+
+            return RedirectToAction("Index", "Motorcycle");
         }
     }
 }

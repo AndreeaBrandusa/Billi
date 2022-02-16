@@ -114,6 +114,10 @@ p {
     padding-left: 22px;
 }
 
+.row3 row3:link row3:visited {
+    text-decoration: none;
+}
+
 .col2 {
     flex-basis: 50%;
     min-width: 300px;
@@ -301,10 +305,16 @@ p {
     margin-bottom: 20px;
     flex-basis: 12%;
     text-align: center;
+    text-decoration: none;
 }
 
 .footer-col-1:hover {
     filter: grayscale(0%);
+    text-decoration: none;
+}
+
+.footer-col-1 li {
+    text-decoration: none;
 }
 
 ul {

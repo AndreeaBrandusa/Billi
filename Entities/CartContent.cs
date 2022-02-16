@@ -11,6 +11,8 @@ namespace BilliWebApp.Entities
 
         public string MotorcycleID { get; set; }
 
+        public int Quantity { get; set; }
 
+        public Cart Cart { get; set; }
     }
 }

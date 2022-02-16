@@ -20,6 +20,11 @@ namespace BilliWebApp.Data
 
         public DbSet<MotorcycleImage> MotorcycleImages { get; set; }
 
+        public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<CartContent> CartContents { get; set; }
+
+
         public async Task<bool> SaveAsync()
         {
             var changesNumber = await SaveChangesAsync();
@@ -30,7 +35,24 @@ namespace BilliWebApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<MotorcycleImage>().HasOne(mi => mi.Motorcycle).WithOne(m => m.Image).HasForeignKey<MotorcycleImage>(mi => new { mi.ID }).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<MotorcycleImage>()
+                .HasOne(mi => mi.Motorcycle)
+                .WithOne(m => m.Image).HasForeignKey<MotorcycleImage>(mi => new { mi.ID })
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Cart>()
+                .HasKey(x => new { x.CartID, x.UserID });
+
+            modelBuilder.Entity<Cart>()
+                .HasMany(x => x.CartContents)
+                .WithOne(x => x.Cart);
+
+            modelBuilder.Entity<CartContent>()
+                .HasKey(x => new { x.CartID, x.MotorcycleID });
+
+            modelBuilder.Entity<CartContent>()
+                .HasOne(x => x.Cart)
+                .WithMany(x => x.CartContents);
         }
     }
 }

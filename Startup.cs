@@ -78,6 +78,7 @@ namespace BilliWebApp
 
             services.AddScoped<IdentityService>();
             services.AddScoped<MotorcycleService>();
+            services.AddScoped<CartService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

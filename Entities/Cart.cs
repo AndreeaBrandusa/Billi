@@ -7,8 +7,10 @@ namespace BilliWebApp.Entities
 {
     public class Cart
     {
-        public string ID { get; set; }
+        public string CartID { get; set; }
 
         public string UserID { get; set; }
+
+        public IEnumerable<CartContent> CartContents { get; set; }
     }
 }
